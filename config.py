@@ -1,0 +1,19 @@
+import torch
+
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+VOCAB_SIZE = 30000
+EMB_DIM = 128
+CONTEXT_WINDOW = 5
+HIDDEN_DIM = 512
+BATCH_SIZE = 128
+LR = 0.001
+EPOCHS = 400
+EARLY_STOPPING_PATIENCE = 3
+EARLY_STOPPING_MIN_DELTA = 1e-7
+BEST_MODEL_PATH = "nnlm_best.pt"
+GRAD_CLIP = 5.0
+LR_SCHEDULER_PATIENCE = 2
+LR_SCHEDULER_FACTOR = 0.5
+DROPOUT = 0.2
+TOP_P = 0.9
