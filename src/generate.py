@@ -128,7 +128,6 @@ def generate(seed_text, max_length=20, temperature=0.7):
 
     tokens = vocab(tokenize(seed_text))
     if len(tokens) < config.CONTEXT_WINDOW:
-        # torchtext Vocab may not expose a stoi; build one from itos()
         itos_tmp = vocab.get_itos()
         stoi = {tok: i for i, tok in enumerate(itos_tmp)}
         pad_id = stoi.get("<pad>", stoi.get("<unk>", 0))
@@ -148,7 +147,6 @@ def generate(seed_text, max_length=20, temperature=0.7):
         next_token = torch.multinomial(probs, 1).item()
         tokens.append(next_token)
 
-    itos = vocab.get_itos()
     itos = vocab.get_itos()
     words = [itos[t] for t in tokens if t != pad_id]
     return " ".join(words)

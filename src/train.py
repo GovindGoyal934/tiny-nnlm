@@ -1,5 +1,6 @@
 import sys
 import os
+import copy
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 import torch
@@ -75,7 +76,7 @@ def train():
         if best_val_loss - val_avg_loss > config.EARLY_STOPPING_MIN_DELTA:
             best_val_loss = val_avg_loss
             epochs_no_improve = 0
-            best_state = model.state_dict()
+            best_state = copy.deepcopy(model.state_dict())
             torch.save(best_state, config.BEST_MODEL_PATH)
             print(f"Validation loss improved; saved best model to {config.BEST_MODEL_PATH}")
         else:
